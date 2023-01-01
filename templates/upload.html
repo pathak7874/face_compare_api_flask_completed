@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Upload</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+</head>
+
+<body>
+
+    <form id="upload-form" action="{{ url_for('compare') }}" method="POST" enctype="multipart/form-data">
+
+        <strong>File 1:</strong><br>
+        <input id="file-picker" type="file" name="file" accept="image/*"><br>
+        <strong>File 2:</strong><br>
+        <input id="file2-picker" type="file" name="file2" accept="image/*">
+        <div id="msg"></div>
+        <input type="submit" value="Upload!" id="upload-button">
+    </form>
+</body>
+<script>
+
+    $("#file-picker").change(function () {
+
+        var input = document.getElementById('file-picker');
+        var input2 = document.getElementById('file2-picker');
+        var ext = input.files.name.substring(input.files.name.lastIndexOf('.') + 1).toLowerCase()
+        var ext2 = input2.files.name.substring(input2.files.name.lastIndexOf('.') + 1).toLowerCase()
+
+        if (((ext == 'png') || (ext == 'jpg') || (ext == 'jpeg')) && ((ext2 == 'png') || (ext2 == 'jpg') || (ext == 'jpeg'))) {
+            $("#msg").text("Files are supported")
+        }
+        else {
+            $("#msg").text("Files are NOT supported")
+            document.getElementById("file-picker").value = "";
+            document.getElementById("file2-picker").value = "";
+        }
+
+    }
+
+
+    ,);
+
+</script>
+
+</html>
